@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPES Hypervision</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Username Entry Screen -->
+    <div id="usernameScreen" class="screen active">
+        <!-- Floating decoration elements -->
+        <div class="floating-shape" style="position: absolute; top: 10%; left: 10%; width: 100px; height: 100px; background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%); border-radius: 50%; animation: floatBlob 15s ease-in-out infinite;"></div>
+        <div class="floating-shape" style="position: absolute; bottom: 20%; right: 15%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(118, 75, 162, 0.1) 0%, transparent 70%); border-radius: 50%; animation: floatBlob 20s ease-in-out infinite reverse;"></div>
+        <div class="welcome-container">
+            <div class="logo">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="60" height="60" rx="12" fill="#21808D"/>
+                    <path d="M20 30L27 37L40 24" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h1 class="welcome-title">UPES Hypervision</h1>
+            <div class="input-container">
+                <label for="usernameInput" class="input-label">Enter your name to begin</label>
+                <div class="input-wrapper" style="position: relative;">
+                    <input 
+                        type="text" 
+                        id="usernameInput" 
+                        class="username-input" 
+                        placeholder="Your Name"
+                        autocomplete="off"
+                        maxlength="50"
+                    >
+                    <div class="input-icon" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--color-text-secondary); pointer-events: none; font-size: 20px;">👤</div>
+                </div>
+                <p class="error-message" id="usernameError"></p>
+                <button id="enterPortalBtn" class="btn btn-primary">Enter Portal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Selection Screen -->
+    <div id="selectionScreen" class="screen">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">UPES Hypervision</h1>
+                <p class="header-greeting" id="userGreeting"></p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <!-- Success Message -->
+                <div id="successMessage" class="success-message hidden">
+                    <svg class="success-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p id="successText"></p>
+                </div>
+
+                <!-- All Full Message -->
+                <div id="allFullMessage" class="all-full-message hidden">
+                    <svg class="warning-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 20h20L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h2>All Problem Statements Full</h2>
+                    <p>All problem statements have reached their limit. No more selections are available.</p>
+                </div>
+
+                <!-- Options Grid -->
+                <div class="options-grid" id="optionsGrid">
+                    <!-- Option A -->
+                    <div class="option-card" data-option="optionA">
+                        <div class="card-icon" style="position: absolute; top: 16px; right: 16px; font-size: 32px; opacity: 0.3; transition: all 0.3s ease;">💡</div>
+                        <div class="option-status-badge" data-status="available">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Available</span>
+                        </div>
+                        <div class="option-content">
+                            <h3 class="option-title">Problem Statement A</h3>
+                            <p class="option-description">Digital Innovation Track</p>
+                            <div class="option-counter">
+                                <span class="counter-label">Selected:</span>
+                                <span class="counter-value" id="counterA">0/20</span>
+                            </div>
+                        </div>
+                        <button class="option-select-btn" data-option="optionA">
+                            Select This Problem Statement
+                        </button>
+                    </div>
+
+                    <!-- Option B -->
+                    <div class="option-card" data-option="optionB">
+                        <div class="card-icon" style="position: absolute; top: 16px; right: 16px; font-size: 32px; opacity: 0.3; transition: all 0.3s ease;">🤖</div>
+                        <div class="option-status-badge" data-status="available">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Available</span>
+                        </div>
+                        <div class="option-content">
+                            <h3 class="option-title">Problem Statement B</h3>
+                            <p class="option-description">AI &amp; Machine Learning Track</p>
+                            <div class="option-counter">
+                                <span class="counter-label">Selected:</span>
+                                <span class="counter-value" id="counterB">0/20</span>
+                            </div>
+                        </div>
+                        <button class="option-select-btn" data-option="optionB">
+                            Select This Problem Statement
+                        </button>
+                    </div>
+
+                    <!-- Option C -->
+                    <div class="option-card" data-option="optionC">
+                        <div class="card-icon" style="position: absolute; top: 16px; right: 16px; font-size: 32px; opacity: 0.3; transition: all 0.3s ease;">🔒</div>
+                        <div class="option-status-badge" data-status="available">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Available</span>
+                        </div>
+                        <div class="option-content">
+                            <h3 class="option-title">Problem Statement C</h3>
+                            <p class="option-description">Cybersecurity Track</p>
+                            <div class="option-counter">
+                                <span class="counter-label">Selected:</span>
+                                <span class="counter-value" id="counterC">0/20</span>
+                            </div>
+                        </div>
+                        <button class="option-select-btn" data-option="optionC">
+                            Select This Problem Statement
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summary Section -->
+                <section class="summary-section" id="summarySection">
+                    <h2>Selection Summary</h2>
+                    
+                    <div class="summary-stats">
+                        <div class="stat-card">
+                            <span class="stat-icon">📊</span>
+                            <span class="stat-label">Total Selections</span>
+                            <span class="stat-value" id="total-selections">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">🎯</span>
+                            <span class="stat-label">Available Slots</span>
+                            <span class="stat-value" id="available-slots">60</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">👥</span>
+                            <span class="stat-label">Distinct Users</span>
+                            <span class="stat-value" id="distinct-users">0</span>
+                        </div>
+                    </div>
+                    
+
+                    <div class="breakdown">
+                        <h3>Breakdown by Problem Statement</h3>
+                        
+                        <div class="breakdown-item">
+                            <span class="breakdown-item-name">💡 Problem Statement A</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-fill status-available" id="progress-a" style="width: 0%;"></div>
+                            </div>
+                            <span class="breakdown-count" id="count-a">0/20 (0%)</span>
+                        </div>
+                        
+                        <div class="breakdown-item">
+                            <span class="breakdown-item-name">🤖 Problem Statement B</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-fill status-available" id="progress-b" style="width: 0%;"></div>
+                            </div>
+                            <span class="breakdown-count" id="count-b">0/20 (0%)</span>
+                        </div>
+                        
+                        <div class="breakdown-item">
+                            <span class="breakdown-item-name">🔒 Problem Statement C</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-fill status-available" id="progress-c" style="width: 0%;"></div>
+                            </div>
+                            <span class="breakdown-count" id="count-c">0/20 (0%)</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content" style="max-width: 1200px; margin: 0 auto;">
+                <p class="footer-text" style="animation: fadeIn 1s ease;">⚡ Each problem statement can be selected by only 20 users – First come, first serve!</p>
+            </div>
+        </footer>
+        
+        <!-- Developer Footer -->
+        <footer class="developer-footer">
+            <div class="developer-content">
+                <p class="developer-text">Developed by <span class="developer-name">Akash Yadav</span></p>
+                <p class="developer-subtext">© 2025 | UPES Hypervision</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
